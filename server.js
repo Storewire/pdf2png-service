@@ -79,7 +79,10 @@ http.createServer(function (req, res) {
 
                     await page.render(renderContext).promise.then(function () {
                         res.writeHead(200, {'Content-Type': 'image/png'});
-                        pages.push({ page_number: pageNumber, data: canvasAndContext.canvas.toDataURL()});
+                        pages.push({
+                            page_number: pageNumber,
+                            data: canvasAndContext.canvas.toDataURL().replace("data:image/png;base64," , "")
+                        });
                         console.log((new Date()).toISOString() + ' PNG created');
                     });
                 });
