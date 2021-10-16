@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:15-alpine
 WORKDIR /app
 RUN apk add --update python3 make g++ fontconfig \
    && rm -rf /var/cache/apk/*
