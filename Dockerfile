@@ -1,8 +1,5 @@
-FROM node:15-alpine
+FROM node:14.10.1-slim
 WORKDIR /app
-RUN apk add --update python3 make g++ fontconfig \
-   && rm -rf /var/cache/apk/*
-
 COPY server.js package*.json ./
 RUN npm install --only=production
 EXPOSE 3001
