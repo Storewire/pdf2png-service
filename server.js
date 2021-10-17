@@ -64,7 +64,7 @@ http.createServer(function (req, res) {
         // Load the PDF file.
         pdfjsLib.getDocument({
             data: rawData,
-            disableFontFace: false,
+            disableFontFace: true,
             standardFontDataUrl: defaultFontsPath
         }).promise.then(async (pdfDocument) => {
             console.log((new Date()).toISOString() + ' PDF loaded (' + rawData.byteLength + ' Bytes)');
