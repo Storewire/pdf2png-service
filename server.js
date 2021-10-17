@@ -5,6 +5,7 @@ const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js')
 
 const host = process.env.PDF2PNG_HOST || '0.0.0.0'
 const port = process.env.PDF2PNG_PORT || 3001
+const defaultFontsPath = process.env.PDF2PNG_FONTS || './node_modules/pdfjs-dist/standard_fonts/'
 
 function NodeCanvasFactory() {
 }
@@ -61,7 +62,11 @@ http.createServer(function (req, res) {
         const rawData = new Uint8Array(Buffer.concat(chunks));
 
         // Load the PDF file.
-        pdfjsLib.getDocument({data: rawData, disableFontFace: false}).promise.then(async (pdfDocument) => {
+        pdfjsLib.getDocument({
+            data: rawData,
+            disableFontFace: false,
+            standardFontDataUrl: defaultFontsPath
+        }).promise.then(async (pdfDocument) => {
             console.log((new Date()).toISOString() + ' PDF loaded (' + rawData.byteLength + ' Bytes)');
             const pages = [];
 
